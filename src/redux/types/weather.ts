@@ -72,6 +72,7 @@ export interface CityData {
     name: string
   }
   score: number
+  localizedName: string
   coordinates: {
     latitude: number
     longitude: number

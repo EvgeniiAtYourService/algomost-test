@@ -27,7 +27,8 @@ export const getCities = () => {
   return async (dispatch: Dispatch<WeatherAction>) => {
     try {
       const res = await fetch(
-        'https://spott.p.rapidapi.com/places?type=CITY&country=RU&limit=10',
+        // 'https://spott.p.rapidapi.com/places?type=CITY&country=CZ&limit=10',
+        'https://spott.p.rapidapi.com/places?type=CITY&language=%20ru&country=RU%2CUA%2CBY%2CKZ%2CDE%2CFR%2CIT%2CES%2CPT%2CCZ%2CPL%2CMD%2CRO%2CUS%2CCA%2CMX%2CBR%2CAU%2CAT%2CEG%2CZA%2CKR&limit=100',
         options
       )
 

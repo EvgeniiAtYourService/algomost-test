@@ -11,6 +11,9 @@ function App(): JSX.Element {
   const citiesData = useSelector(
     (state: RootState) => state.weatherState.citiesData
   )
+  const weatherData = useSelector(
+    (state: RootState) => state.weatherState.weatherData
+  )
   useEffect(() => {
     dispatch<any>(getCities())
   }, [])
@@ -25,38 +28,27 @@ function App(): JSX.Element {
       <p>select: {city}</p>
       <div className="dropdown">
         <button className="dropbtn">Dropdown</button>
-        <div className="dropdown-content">
-          {citiesData?.map((city) => (
-            <p
-              onClick={() => {
-                setCity(city.name)
-              }}
-            >
-              {city.name}
-            </p>
-          ))}
-          {/* <p>Moscow</p>
+        {/* <div className="dropdown-content"> */}
+        {citiesData?.map((city) => (
           <p
+            key={city.id}
             onClick={() => {
-              setCity('Surgut')
+              setCity(city.name)
             }}
           >
-            Surgut
+            <strong>{city.country.name}</strong> {city.localizedName}
           </p>
-          <p
-            onClick={() => {
-              setCity('New York')
-            }}
-          >
-            New York
-          </p> */}
-        </div>
+        ))}
+        {/* </div> */}
       </div>
+      <h3>
+        TEMPERATURE: {weatherData?.main.temp} <sup>o</sup>С
+      </h3>
       <br />
       <br />
       <br />
       <p>get weather:</p>
-      <button onClick={fetchWeather} style={{ marginLeft: '400px' }}>
+      <button onClick={fetchWeather} style={{ marginLeft: '200px' }}>
         Get Weather
       </button>
       <br />
