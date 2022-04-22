@@ -9,7 +9,7 @@
   opacity: 1;
   padding: 30px;
   border-radius: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
   box-shadow: var(--shadow);
   z-index: 10000;
 }
