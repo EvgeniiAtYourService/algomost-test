@@ -48,6 +48,63 @@ export interface WeatherError {
   message: string
 }
 
+interface Weather3HDescr {
+  id: number
+  main: string
+  description: string
+  icon: string
+}
+
+interface Weather3H {
+  dt: number
+  main: {
+    temp: number
+    feels_like: number
+    temp_min: number
+    temp_max: number
+    pressure: number
+    sea_level: number
+    grnd_level: number
+    humidity: number
+    temp_kf: number
+  }
+  weather: Weather3HDescr[]
+  clouds: {
+    all: number
+  }
+  wind: {
+    speed: number
+    deg: number
+    gust: number
+  }
+  visibility: number
+  pop: number
+  sys: {
+    pod: string
+  }
+  dt_txt: string
+}
+
+export interface Weather3HData {
+  cod: string
+  message: 0
+  cnt: number
+  list: Weather3H[]
+  city: {
+    id: string
+    name: string
+    coord: {
+      lon: number
+      lat: number
+    }
+    country: string
+    population: number
+    timezone: number
+    sunrise: number
+    sunset: number
+  }
+}
+
 export interface CityData {
   id: string
   geonameId: number
@@ -82,15 +139,20 @@ export interface CityData {
 export enum WeatherActionTypes {
   GET_WEATHER = 'GET_WEATHER',
   GET_CITIES = 'GET_CITIES',
-  SET_LOADING = 'SET_LOADING',
+  SET_FETCHING_WEATHER = 'SET_FETCHING_WEATHER',
   SET_ERROR = 'SET_ERROR',
   SET_ALERT = 'SET_ALERT',
+  GET_WEATHER_3H = 'GET_WEATHER_3H',
+  SET_FETCHING_WEATHER_3H = 'SET_FETCHING_WEATHER_3H',
 }
 
 export interface WeatherState {
   citiesData: Array<CityData> | null
   weatherData: WeatherData | null
-  loading: boolean
+  weatherData3h: Weather3HData | null
+  isFetchingCities: boolean
+  isFetchingWeather: boolean
+  isFetchingWeather3h: boolean
   error: string | null
 }
 
@@ -104,8 +166,9 @@ interface GetCities {
   payload: CityData[]
 }
 
-interface SetLoadingAction {
-  type: WeatherActionTypes.SET_LOADING
+interface SetFetchingWeatherAction {
+  type: WeatherActionTypes.SET_FETCHING_WEATHER
+  payload: boolean
 }
 
 interface SetError {
@@ -113,17 +176,20 @@ interface SetError {
   payload: string | null
 }
 
+interface getWeather3h {
+  type: WeatherActionTypes.GET_WEATHER_3H
+  payload: Weather3HData
+}
+
+interface setFetchingWeather3h {
+  type: WeatherActionTypes.SET_FETCHING_WEATHER_3H
+  payload: boolean
+}
+
 export type WeatherAction =
   | GetWeatherAction
-  | SetLoadingAction
+  | SetFetchingWeatherAction
   | SetError
   | GetCities
-
-export interface AlertAction {
-  type: WeatherActionTypes.SET_ALERT
-  payload: string
-}
-
-export interface AlertState {
-  message: string
-}
+  | getWeather3h
+  | setFetchingWeather3h

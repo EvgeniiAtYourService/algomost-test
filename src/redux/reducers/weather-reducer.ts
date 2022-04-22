@@ -7,8 +7,11 @@ import {
 
 const initialState: WeatherState = {
   citiesData: null,
+  isFetchingCities: true,
   weatherData: null,
-  loading: false,
+  weatherData3h: null,
+  isFetchingWeather: false,
+  isFetchingWeather3h: false,
   error: null,
 }
 
@@ -16,13 +19,19 @@ export const weatherReducer = (
   state = initialState,
   action: WeatherAction
 ): WeatherState => {
-  const copyState = { ...state }
   switch (action.type) {
     case WeatherActionTypes.GET_WEATHER:
       return {
         ...state,
         weatherData: action.payload,
-        loading: false,
+        isFetchingWeather: false,
+        error: null,
+      }
+    case WeatherActionTypes.GET_WEATHER_3H:
+      return {
+        ...state,
+        weatherData3h: action.payload,
+        isFetchingWeather3h: false,
         error: null,
       }
     case WeatherActionTypes.GET_CITIES:
@@ -54,13 +63,12 @@ export const weatherReducer = (
         }
       }
 
-      // получить массив локализованных названий
+      // получить массив локализованных названий и сортировать в алфавитном порядке
       const cityNamesRu = citiesData.map((city) => city.localizedName)
       const collator = new Intl.Collator('ru')
       cityNamesRu.sort(collator.compare)
-      console.log(cityNamesRu)
 
-      // сортировать массив городов на основе локализованных названий
+      // сортировать массив городов на основе массива локализованных названий
       const result: Array<CityData> = []
       cityNamesRu.forEach((nameRu) => {
         let found = false
@@ -76,19 +84,25 @@ export const weatherReducer = (
       return {
         ...state,
         citiesData: result,
-        loading: false,
+        isFetchingCities: false,
         error: null,
       }
-    case WeatherActionTypes.SET_LOADING:
+    case WeatherActionTypes.SET_FETCHING_WEATHER:
       return {
         ...state,
-        loading: true,
+        isFetchingWeather: action.payload,
+      }
+    case WeatherActionTypes.SET_FETCHING_WEATHER_3H:
+      return {
+        ...state,
+        isFetchingWeather3h: action.payload,
       }
     case WeatherActionTypes.SET_ERROR:
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        isFetchingWeather: false,
+        isFetchingCities: false,
       }
     default:
       return state

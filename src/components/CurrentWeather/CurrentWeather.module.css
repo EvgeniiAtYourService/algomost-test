@@ -1,0 +1,23 @@
+.currentTemp {
+  font-size: var(--temp-font-size);
+  margin-bottom: 10px;
+}
+
+.weatherInfo {
+  max-width: 305px;
+  margin: 10px auto 0;
+  padding-top: 30px;
+}
+
+.weatherInfo div {
+  text-align: left;
+  margin-left: 45px;
+}
+
+.weatherInfo span:first-child {
+  display: inline-block;
+  width: 100px;
+  min-width: 120px;
+  text-align: left;
+  margin-bottom: 10px;
+}

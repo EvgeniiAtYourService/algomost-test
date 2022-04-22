@@ -1,0 +1,21 @@
+.weatherBlock {
+  width: 400px;
+  min-width: 250px;
+  text-align: center;
+  border: 1px solid lightgrey;
+  padding: 40px 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  margin: 0 10px;
+  animation: scale 0.9s;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

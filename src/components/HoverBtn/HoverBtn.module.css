@@ -1,0 +1,16 @@
+.chooseCity {
+  display: inline-block;
+  background-color: #007fff;
+  color: white;
+  padding: 10px 0;
+  width: 180px;
+  border-radius: 6px;
+  cursor: default;
+  transition: all 0.5s;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.chooseCity:hover {
+  background-color: #2a52be;
+}
