@@ -9,6 +9,7 @@
   box-shadow: var(--shadow);
   margin: 0 10px;
   animation: scale 0.9s;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 @keyframes scale {

@@ -4,14 +4,14 @@
 }
 
 .weatherInfo {
-  max-width: 305px;
+  max-width: 315px;
   margin: 10px auto 0;
   padding-top: 30px;
 }
 
 .weatherInfo div {
   text-align: left;
-  margin-left: 45px;
+  margin-left: 55px;
 }
 
 .weatherInfo span:first-child {

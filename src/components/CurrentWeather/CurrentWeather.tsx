@@ -26,8 +26,7 @@ const CurrentWeather = ({ weatherData, getImgSrc }: Props): JSX.Element => {
           <span>{Math.round(weatherData.wind.speed)} м/c</span>
         </div>
         <div>
-          <span>Давление:</span>{' '}
-          <span>{weatherData.main.pressure} мм рт. ст.</span>
+          <span>Давление:</span> <span>{weatherData.main.pressure} гПа</span>
         </div>
         <div>
           <span>Влажность:</span> <span>{weatherData.main.humidity}%</span>
